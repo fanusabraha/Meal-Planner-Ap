@@ -4,7 +4,7 @@ public class Meals {
 
     private Long id;
     private String imageType;
-    private String titel;
+    private String title;
     private int readyInMinutes;
     private int servings;
     private String sourceUrl;
@@ -24,12 +24,12 @@ public class Meals {
         this.imageType = imageType;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getReadyInMinutes() {
