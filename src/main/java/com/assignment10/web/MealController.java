@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mealplanner")
 public class MealController {
-    // API Key c0eb2e4d56ee4294a6e300ba920ed959
+    // API Key b24e9a29a86b4a619b17595ff2d6ff2b
     @Autowired
     MealService mealService;
     private WeekResponse weekResponse;
@@ -22,7 +22,6 @@ public class MealController {
 
     public ResponseEntity<WeekResponse> getWeekMeals( String numCalories, String diet, String exclusions){
 
-        System.out.println(getDayMeals(numCalories, diet, exclusions).getBody());
      weekResponse = mealService.Weekly(numCalories,diet,exclusions);
      return ResponseEntity.ok(weekResponse);
 

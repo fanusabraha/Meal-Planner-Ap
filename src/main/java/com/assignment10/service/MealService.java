@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Service
 public class MealService {
-    RestTemplate dietTemplate1= new RestTemplate();
-    RestTemplate dietTemplate2= new RestTemplate();
+    @Autowired
+    RestTemplate dietRestTemplate;
     @Autowired
     private String apiKey;
     @Autowired
@@ -25,22 +25,22 @@ public class MealService {
     public WeekResponse Weekly (String targetCalories, String diet, String exclude){
         String uribuilder = getUribuilder("week",targetCalories, diet, exclude);
 
-        return dietTemplate1.getForObject(uribuilder,WeekResponse.class);
+        return dietRestTemplate.getForObject(uribuilder,WeekResponse.class);
     }
 
     public DayResponse daily (String targetCalories, String diet, String exclude){
         String uribuilder2 = getUribuilder("day", targetCalories, diet, exclude);
         
-        return dietTemplate2.getForObject(uribuilder2,DayResponse.class);
+        return dietRestTemplate.getForObject(uribuilder2,DayResponse.class);
     }
     private String getUribuilder(String timeFrame, String targetCalories, String diet, String exclude) {
-        String uribuilder = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
+        return   UriComponentsBuilder.fromHttpUrl(spoonacularBaseUrl+mealPlanEndPoint)
                 .queryParam("timeFrame", timeFrame)
-                .queryParam("targetCalories",Optional.ofNullable(targetCalories))
-                .queryParam("diet",Optional.ofNullable(diet))
-                .queryParam("exclude",Optional.ofNullable(exclude))
-                .queryParam("appkey",apiKey)
+                .queryParamIfPresent("targetCalories",Optional.ofNullable(targetCalories))
+                .queryParamIfPresent("diet",Optional.ofNullable(diet))
+                .queryParamIfPresent("exclude",Optional.ofNullable(exclude))
+                .queryParam("apiKey",apiKey)
                 .build().toUriString();
-        return uribuilder;
+
     }
 }

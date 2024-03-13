@@ -1,12 +1,19 @@
 package com.assignment10.dto;
 
-public class Meals {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Meals {
+    @JsonProperty("id")
     private Long id;
+    @JsonProperty("imageType")
     private String imageType;
+    @JsonProperty("title")
     private String title;
+    @JsonProperty("readyInMinutes")
     private int readyInMinutes;
+    @JsonProperty("servings")
     private int servings;
+    @JsonProperty("sourceUrl")
     private String sourceUrl;
     public Long getId() {
         return id;
