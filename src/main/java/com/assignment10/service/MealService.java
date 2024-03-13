@@ -12,7 +12,8 @@ import java.util.Optional;
 
 @Service
 public class MealService {
-    RestTemplate dietTemplate= new RestTemplate();
+    RestTemplate dietTemplate1= new RestTemplate();
+    RestTemplate dietTemplate2= new RestTemplate();
     @Autowired
     private String apiKey;
     @Autowired
@@ -24,13 +25,13 @@ public class MealService {
     public WeekResponse Weekly (String targetCalories, String diet, String exclude){
         String uribuilder = getUribuilder("week",targetCalories, diet, exclude);
 
-        return dietTemplate.getForObject(uribuilder,WeekResponse.class);
+        return dietTemplate1.getForObject(uribuilder,WeekResponse.class);
     }
 
     public DayResponse daily (String targetCalories, String diet, String exclude){
         String uribuilder2 = getUribuilder("day", targetCalories, diet, exclude);
         
-        return dietTemplate.getForObject(uribuilder2,DayResponse.class);
+        return dietTemplate2.getForObject(uribuilder2,DayResponse.class);
     }
     private String getUribuilder(String timeFrame, String targetCalories, String diet, String exclude) {
         String uribuilder = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
